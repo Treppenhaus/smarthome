@@ -28,16 +28,16 @@ xmlreq = (reqUrl, callback) => {
 createBtnString = (data) => {
     return btnObj
         .replace("${data-color}", "data-" + data.color)
-        .replace("${name}", data.text)
-        .replace("${value-send}", data.send)
+        .replace("${name}", data.name)
+        .replace("${value-send}", data.name)
         .replace("${text}", data.desc);
 }
 
 instantAddEmptyObject = () => document.getElementById("content").innerHTML += "<div class='free'></div>";
 
 
-addObject = (type, data) => {
-    if(type == "button") {
+addObject = (data) => {
+    if(data.type == "button") {
         let content = document.getElementById("content");
         content.innerHTML += createBtnString(data);
 
@@ -47,29 +47,22 @@ addObject = (type, data) => {
     else return;
 }
 
-objBtnClick = (toggleUrl) => {
+objBtnClick = (name) => {
     // buttons are usually just toggle object
     // so we just send a request to the provided ip / webserver
     // provieded "sendValue" should be a valid IP which should toggle something
 
-    xmlreq(toggleUrl, (res) => {
-        data = JSON.parse(res);
+    xmlreq("buttonPressed.php?name=" + name + "&type=button", (res) => {
+        //data = JSON.parse(res);
         // todo: ? add method to work with new gotton data
+        console.log(res);
     })
 }
 
-addObject("button", {
-    text: "PC",
+addObject({
+    type: "button",
+    name: "PC",
     desc: "toggle",
     color: "green",
-    send: "10.0.100.36/sh/test_send",
-    recv: "10.0.100.36/sh/test_recv"
-});
-
-addObject("button", {
-    text: "PC",
-    desc: "toggle",
-    color: "green",
-    send: "10.0.100.36/sh/test_send",
-    recv: "10.0.100.36/sh/test_recv"
+    send: "",
 });
