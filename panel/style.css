@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    position: relative;
 }
 
 body {
@@ -30,7 +31,7 @@ body {
     transform: translateX(-50%) translateY(-50%);
 }
 
-.content {
+#content {
     width: 80vw;
     margin-left: 50%;
     transform: translateX(-50%);
@@ -44,4 +45,20 @@ body {
     background-color: var(--global-bg-light);
     border-radius: 6%;
     margin-top: 10vw;
+    box-sizing: border-box;
+}
+
+.obj-top {
+    height: 70%;
+    text-align: center;
+}
+
+.obj-name {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.obj-btm {
+    height: 30%;
+    text-align: center;
 }

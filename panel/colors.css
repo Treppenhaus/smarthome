@@ -3,4 +3,23 @@
     --global-bg-light: #455d7a;
     --global-red: #f95959;
     --global-text: #e3e3e3;
+
+    --data-red: #f18383;
+    --data-green: #68b468;
+    --data-gray: #696969;
+}
+
+.data-green {
+    border: 2px solid var(--data-green);
+    border-radius: 6%;
+}
+
+.data-red {
+    border: 2px solid var(--data-red);
+    border-radius: 6%;
+}
+
+.data-gray {
+    border: 2px solid var(--data-gray);
+    border-radius: 6%;
 }
