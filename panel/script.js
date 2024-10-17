@@ -1,6 +1,6 @@
 
 let objects = 0;
-let btnObj = "<div class='obj ${data-color}' onclick='objBtnClick(\"${value-send}\");'>\n"+
+let btnObj = "<div class='obj ${data-color}' onclick='objBtnClick(\"${value-send}\", \"${action-send}\");'>\n"+
              "   <div class='obj-top'>\n"+
                    " <h3 class='obj-name'>\n"+
                     "${name}\n"+
@@ -29,8 +29,9 @@ createBtnString = (data) => {
     return btnObj
         .replace("${data-color}", "data-" + data.color)
         .replace("${name}", data.name)
-        .replace("${value-send}", data.name)
-        .replace("${text}", data.desc);
+        .replace("${text}", data.desc)
+        .replace("${value-send}", data.value)
+        .replace("${action-send}", data.action)
 }
 
 instantAddEmptyObject = () => document.getElementById("content").innerHTML += "<div class='free'></div>";
@@ -47,15 +48,16 @@ addObject = (data) => {
     else return;
 }
 
-objBtnClick = (name) => {
+objBtnClick = (value, action) => {
     // buttons are usually just toggle object
     // so we just send a request to the provided ip / webserver
     // provieded "sendValue" should be a valid IP which should toggle something
 
-    xmlreq("buttonPressed.php?name=" + name + "&type=button", (res) => {
+    xmlreq("buttonPressed.php?value=" + value + "&type=button&action=" + action, (res) => {
         //data = JSON.parse(res);
         // todo: ? add method to work with new gotton data
         console.log(res);
+        alert("click processed: " + res);
     })
 }
 
@@ -64,5 +66,6 @@ addObject({
     name: "PC",
     desc: "toggle",
     color: "green",
-    send: "",
+    action: "webRequest",
+    value: "http://10.0.0.27/smarthome/panel/ping",
 });
